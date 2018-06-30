@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-class SwordAttack: MonoBehaviour, Action {
+ 
+public class SwordAttack: Action {
 
     public float duration = 0.25f;
+    public float cooldownDuration = 2.0f;
 
     private float endTime = 0f;
     private SpriteRenderer sprite;
@@ -16,16 +17,21 @@ class SwordAttack: MonoBehaviour, Action {
     // Update is called once per frame
     void Update() {
         bool performingAction = Time.time < endTime;
-
-        if (!performingAction && Input.GetKey(KeyCode.Space)) {
-            performingAction = true;
-            performAction();
-        }
-
         sprite.enabled = performingAction;
     }
 
-    public void performAction() {
+    //
+    // Action Class Overrides
+    //
+    public override float getCooldownDuration() {
+        return cooldownDuration;
+    }
+
+    public override KeyCode getKeyCode() {
+        return KeyCode.Space;
+    }
+
+    public override void perform() {
         endTime = Time.time + duration;
     }
 }

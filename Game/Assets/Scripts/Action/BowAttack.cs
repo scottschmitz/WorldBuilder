@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-class BowAttack : MonoBehaviour, Action {
-
+class BowAttack : Action {
+    
     public float duration = 0.75f;
+    public float cooldownDuration = 4.0f;
+    public Transform arrowTransform;
+    public Rigidbody2D arrowTemplate;
 
     private float endTime = 0f;
     private SpriteRenderer sprite;
@@ -16,16 +19,22 @@ class BowAttack : MonoBehaviour, Action {
     // Update is called once per frame
     void Update() {
         bool performingAction = Time.time < endTime;
-
-        if (!performingAction && Input.GetKey(KeyCode.F)) {
-            performingAction = true;
-            performAction();
-        }
-
-        sprite.enabled = performingAction;
+        //sprite.enabled = performingAction;
     }
 
-    public void performAction() {
+    //
+    // Action Class Overrides
+    //
+    public override float getCooldownDuration() {
+        return cooldownDuration;
+    }
+
+    public override KeyCode getKeyCode() {
+        return KeyCode.F;
+    }
+
+    public override void perform() {
         endTime = Time.time + duration;
+        Instantiate(arrowTemplate, arrowTransform.position, arrowTransform.rotation);
     }
 }
