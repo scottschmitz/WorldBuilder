@@ -1,18 +1,13 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : Character {
 
-  public int speedModifier = 100;
+    public int speedModifier = 100;
+    public GameObject attackArea;
 
-  private Rigidbody2D rigidBody;
-
-	void Start () {
-		rigidBody = GetComponent<Rigidbody2D>();
-	}
-	
-	void Update () {
-		Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    void Update () {
+		movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         rigidBody.MovePosition(rigidBody.position + movementVector * Time.deltaTime * 100);
 	}
 }
