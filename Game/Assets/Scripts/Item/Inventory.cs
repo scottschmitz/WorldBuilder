@@ -4,42 +4,48 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
+    private const int SIZE = 0;
+    private const int COLUMNS = 4;
+
     public GameObject panel;
-    public int numColumns;
-    public int numRows;
 
-    private Item[] items;
-
+    private List<InventoryItem> items;
     private ContextMenuItemAttribute[] contextMenuItems;
 
-	// Use this for initialization
 	void Start () {
-        createItems();
+        // TODO: Preserve items across sessions
+        items = new List<InventoryItem>();
 	}
-	
-    private void createItems() {
-        items = new Item[numColumns * numRows];
+
+    public bool addItem(Item item) {
+        if (items.Count >= SIZE) {
+            return false;
+        }
+
+        int index = items.Count;
 
         int widthSpacer = 20;
         int width = 150;
+        int column = index % COLUMNS;
+        int xPos = widthSpacer + (width + widthSpacer) * column;
 
         int heightSpacer = 20;
         int height = 1000;
+        int row = index / COLUMNS;
+        int yPos = heightSpacer + (height + heightSpacer) * row;
 
+        Vector2 position = new Vector2(xPos, yPos);
         Vector2 size = new Vector2(width, height);
 
-        for (int i = 0; i < numRows; i++) {
-            int yPos = -1 * (heightSpacer + (height + heightSpacer) * i);
-
-            for (int j = 0; j < numColumns; j++) {
-                int xPos = widthSpacer + (width + widthSpacer) * j;
-                Vector2 position = new Vector2(xPos, yPos);
-
-                Item item = (Item)ScriptableObject.CreateInstance("Item");
-                item.init(this.panel, null, "item_type", null, null, position, size);
-
-                items[i] = item;
-            }
-        }
+        InventoryItem inventoryItem = (InventoryItem)ScriptableObject.CreateInstance("InventoryItem");
+        inventoryItem.init(
+            this.panel,
+            item.icon,
+            item.gameObject,
+            item.transform.parent,
+            position,
+            size
+        );
+        return true;
     }
 }

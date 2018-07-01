@@ -14,6 +14,8 @@ public class Character: MonoBehaviour {
     public Skill mining;
     public Skill blacksmithing;
 
+    public Inventory inventory;
+
     void Start() {
         rigidBody = GetComponent<Rigidbody2D>();
 
