@@ -11,6 +11,10 @@ public class Cooldown : MonoBehaviour {
     private float end;
 
     void Update() {
+        if (action == null) {
+            return;
+        }
+
         if (Time.time > end) {
             if (Input.GetKey(action.getKeyCode())) {
                 action.perform();
