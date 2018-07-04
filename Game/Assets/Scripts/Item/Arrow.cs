@@ -16,6 +16,6 @@ public class Arrow : MonoBehaviour {
 	
 	// Update is called once per frame
     void Update () {
-        body.MovePosition(transform.position + transform.right * Time.deltaTime * 100);
+        body.MovePosition(transform.position + transform.right * Time.deltaTime * 20);
 	}
 }

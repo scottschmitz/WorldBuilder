@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
 
-    private const int SIZE = 0;
+    private const int SIZE = 16;
     private const int COLUMNS = 4;
 
     public GameObject panel;
@@ -13,7 +13,6 @@ public class Inventory : MonoBehaviour {
     private ContextMenuItemAttribute[] contextMenuItems;
 
 	void Start () {
-        // TODO: Preserve items across sessions
         items = new List<InventoryItem>();
 	}
 
@@ -47,5 +46,9 @@ public class Inventory : MonoBehaviour {
             size
         );
         return true;
+    }
+
+    public void togglePanel() {
+        panel.SetActive(!panel.activeSelf);
     }
 }
