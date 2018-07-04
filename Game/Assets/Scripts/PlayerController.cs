@@ -31,4 +31,7 @@ public class PlayerController : Character {
         // Apply the movement direction AFTER rotating!
         rigidBody.MovePosition(rigidBody.position + movementVector * Time.deltaTime * speedModifier);
 	}
+    private void LateUpdate() { 
+        Camera.main.transform.position = transform.position + new Vector3(0, 0, -10);
+    }
 }
