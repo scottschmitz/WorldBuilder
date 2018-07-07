@@ -52,6 +52,7 @@ public class GameManager : MonoBehaviour {
                     GameObject playerObj = (GameObject) Instantiate(Resources.Load("Player"), new Vector3(), Quaternion.identity);
                     _player = playerObj.GetComponent<PlayerController>();
                     _player.inventory = _hud.GetInventory();
+                    DontDestroyOnLoad(_player);
                 }
             }
 
@@ -71,6 +72,10 @@ public class GameManager : MonoBehaviour {
                 OnStateChange();
             }
         }
+    }
+
+    public PlayerController GetPlayer() {
+        return _player;
     }
 
     /*
