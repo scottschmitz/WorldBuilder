@@ -27,6 +27,6 @@ public class PlayerController : Character {
 
         // TODO: When Animator is Setup Correctly
         //animator.SetFloat("MoveX", horizontalInput);
-        //animator.SetFloat("MoveY", verticalInput);   
+        //animator.SetFloat("MoveY", verticalInput);
     }
 }

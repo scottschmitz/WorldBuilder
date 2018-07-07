@@ -15,7 +15,10 @@ public class PlayerStartPoint : MonoBehaviour {
         _camera = GameManager.Instance.GetCamera();
 
         if (GameManager.Instance.GetPlayer().startLocation == pointName) {
-            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, _camera.transform.position.z);    
+            _player.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            _camera.transform.position = new Vector3(transform.position.x, transform.position.y, _camera.transform.position.z);
+
+            Debug.Log("Starting PlayerStartPoint: " + pointName + ", position: " + _player.transform.position);
         }
 	}
 }
