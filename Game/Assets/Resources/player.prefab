@@ -189,7 +189,7 @@ Animator:
   m_GameObject: {fileID: 1815349170853892}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a84c4a650a43bb4468c22b1e3a116fae, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementVector: {x: 0, y: 0}
   inventory: {fileID: 0}
-  speedModifier: 5
+  moveSpeed: 5
   action1: {fileID: 114832529869288322}
   action2: {fileID: 114740940335348950}
 --- !u!114 &114832529869288322

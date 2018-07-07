@@ -1,37 +1,30 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerController : Character {
 
-    public float speedModifier = 10.0f;
+    public float moveSpeed = 5.0f;
 
     public Action action1;
     public Action action2;
 
+    private Animator animator;
+
     private void Start() {
-        Debug.Log("Setting Actions");
         ActionBar.Instance.setAction1(action1);
         ActionBar.Instance.setAction2(action2);
+
+        animator = GetComponent<Animator>();
     }
 
-    void Update() {
-        movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+    private void Update() {
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (movementVector != Vector2.zero) {
-            float angle = Mathf.Atan2(movementVector.y, movementVector.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
+        float modifier = moveSpeed * Time.deltaTime;
+        transform.Translate(new Vector3(horizontalInput * modifier, verticalInput * modifier, 0f));
 
-        // TODO: Figure out why it is not set in Character.Start()
-        if (rigidBody == null) {
-            Debug.Log("no rigidbody");
-            rigidBody = GetComponent<Rigidbody2D>();
-        }
-
-        // Apply the movement direction AFTER rotating!
-        rigidBody.MovePosition(rigidBody.position + movementVector * Time.deltaTime * speedModifier);
-	}
-    private void LateUpdate() { 
-        Camera.main.transform.position = transform.position + new Vector3(0, 0, -10);
+        // TODO: When Animator is Setup Correctly
+        //animator.SetFloat("MoveX", horizontalInput);
+        //animator.SetFloat("MoveY", verticalInput);   
     }
 }

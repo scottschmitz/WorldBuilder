@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     private static GameManager _instance;
     private static HUD _hud;
     private static PlayerController _player;
+    private static CameraController _camera;
 
     public static GameManager Instance {
         get {
@@ -54,6 +55,15 @@ public class GameManager : MonoBehaviour {
                     _player.inventory = _hud.GetInventory();
                     DontDestroyOnLoad(_player);
                 }
+
+                _camera = Object.FindObjectOfType<CameraController>();
+                if (_camera == null) {
+                    GameObject cameraObj = (GameObject)Instantiate(Resources.Load("MainCamera"), new Vector3(), Quaternion.identity);
+                    _camera = cameraObj.GetComponent<CameraController>();
+                    _camera.followTarget = _player.transform;
+                    DontDestroyOnLoad(_camera);
+                }
+
             }
 
             return _instance;
