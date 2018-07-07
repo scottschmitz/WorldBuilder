@@ -7,6 +7,8 @@ public class PlayerController : Character {
     public Action action1;
     public Action action2;
 
+    public string startLocation;
+
     private Animator animator;
 
     private void Start() {

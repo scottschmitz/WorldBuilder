@@ -88,6 +88,10 @@ public class GameManager : MonoBehaviour {
         return _player;
     }
 
+    public CameraController GetCamera() {
+        return _camera;
+    }
+
     /*
      * Sample implementation of an OnStateChangeHandler 
      */
