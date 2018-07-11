@@ -2,7 +2,7 @@
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public enum GameState { Game, PauseMenu }
+public enum GameState { Game, Death, PauseMenu }
 public delegate void OnStateChangeHandler();
 
 public class GameManager : MonoBehaviour {
@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour {
                 GameObject go = new GameObject("_GameManager");
                 DontDestroyOnLoad(go);
                 _instance = go.AddComponent<GameManager>();
+                _instance.OnStateChange += OnGameStateChange;
 
                 // Before we start creating the UI lets create the event system
                 // This would happen naturally by adding a Canvas through the UI)
@@ -99,6 +100,10 @@ public class GameManager : MonoBehaviour {
         if (_instance.gameState == GameState.Game) {
             Debug.Log("Changing timeScale from: " + Time.timeScale);
             Time.timeScale = 1;
+        } else if (_instance.gameState == GameState.Death) {
+            Debug.Log("Player has died. Reload the current level");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            _player.gameObject.SetActive(true);
         } else if (_instance.gameState == GameState.PauseMenu) {
             Debug.Log("Changing timeScale from: " + Time.timeScale + " to 0");
             Time.timeScale = 0;
