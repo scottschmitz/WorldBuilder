@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelToLoad: Outside
-  locationToStart: Left_House_Out
+  locationToStart: 1
 --- !u!61 &231703183
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -436,3 +436,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startDirection: {x: 0, y: 0}
   pointName: Left_House_In
+  location: 0
