@@ -20,6 +20,6 @@ public class DialogueManager : MonoBehaviour {
     public void showBox(string dialogue) {
         dialogueActive = true;
         dialogueBox.SetActive(true);
-        dialogueText.text = dialogue
+        dialogueText.text = dialogue;
     }
 }

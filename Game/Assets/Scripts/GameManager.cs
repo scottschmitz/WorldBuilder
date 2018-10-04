@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour {
             // if one has already been created for us
             if (_instance == null) {
                 _instance = Object.FindObjectOfType<GameManager>();
+                Debug.Log("it is null");
             }
 
             // If we still dont have an instance, it must not exist,
@@ -38,11 +39,6 @@ public class GameManager : MonoBehaviour {
                 eventSystem.AddComponent<EventSystem>();
                 eventSystem.AddComponent<StandaloneInputModule>();
                 DontDestroyOnLoad(eventSystem);
-
-                // Now lets just create our blank canvas, that all of our GUI will be a part of
-                GameObject gui = (GameObject)Instantiate(Resources.Load("GUI/MainCanvas"), new Vector3(), Quaternion.identity);
-                gui.name = "_GUI";
-                DontDestroyOnLoad(gui);
 
                 _hud = HUD.Instance;
                 if (_hud == null) {
